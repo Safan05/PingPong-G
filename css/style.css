@@ -1,0 +1,83 @@
+.container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+html{
+  overflow: hidden;
+}
+/** small screens **/
+@media (min-width: 768px){
+    .container{
+      width:750px;
+    }
+  }
+  /** medium screens **/
+  @media (min-width: 970px){
+    .container{
+      width:970px;
+    }
+  }
+  /** large screens **/
+  @media (min-width: 1200px){
+    .container{
+      width:1170px;
+    }
+  }
+body{
+    background-color: gray;
+}
+.select{
+  display: flex;
+  justify-content: left;
+}
+.select .colors{
+  padding-right: 50px;
+  font-size: 20px;
+}
+.Landing .container{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+.options .container{
+  width: 600px;
+  display: flex;
+    background-color: black;
+    justify-content: center;
+}
+canvas{
+  border-top:solid green 15px;
+  border-bottom:solid green 15px;
+  border-left:solid white 15px;
+  border-right:solid white 15px;
+  width: 600px;
+  height: 400px;
+}
+.buttons{
+  padding-top: 20px;
+  font-size: 40px;
+}
+.buttons .container{
+  display: flex;
+  justify-content: center;
+}
+.buttons i{
+  padding-left: 280px;
+  padding-right: 280px;
+}
+@media(max-width: 670px){
+  canvas{
+    width: 300px;
+    height: 200px;
+    border-width: 7px;
+  }
+  .options .container{
+    width: 300px;
+  }
+  .buttons i{
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
