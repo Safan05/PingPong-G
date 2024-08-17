@@ -9,6 +9,15 @@
     <title>PingPong Game</title>
 </head>
 <body>
+    <div class="Header">
+        <div class="container">
+            <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+            <div class="controls">
+                <h3 onclick="gameLoop();">Start</h3>
+                <h3 onclick="Restart();">Restart</h3>
+            </div>
+        </div>
+    </div>
     <div class="Landing">
     <div class="container">
     <canvas id="frame"></canvas>
@@ -19,7 +28,7 @@
     <div class="select">
         <div class="colors" onclick="ChangeCol('red');" style="color: red;"> red </div>
         <div class="colors" onclick="ChangeCol('blue');"style="color: blue;"> blue </div>
-        <div class="colors" onclick="ChangeCol('Green');"style="color: green;"> green </div>
+        <div class="colors" onclick="ChangeCol('orange');"style="color: orange;"> orange </div>
         </div>
     </div>
     </div>

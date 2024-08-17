@@ -31,11 +31,11 @@ const ball={
     }
 }
 const SepLine={
-    x: (frame.width-2)/2,
+    x: (frame.width-8)/2,
     y:0,
     width:2,
     height:10,
-    color:"Orange"
+    color:"white"
 }
 const Player_Bar={
     x:0,
@@ -43,28 +43,35 @@ const Player_Bar={
     width:frame.width/60,
     height:frame.height/4,
     color:"red",
-    speed:frame.height/25,
+    speed:frame.height/20,
     score:0,
     reset: function reset(){
         this.score=0;
+        this.y=(frame.height-frame.height/4)/2;
     },
     up:function up(){
+        if(this.y-this.speed<=0)
+            this.y=0;
+        else 
         this.y-=this.speed;
     },
     down:function down(){
-        this.y+=this.speed;
-    }
+        if(this.y+this.height+this.speed>=frame.height)
+            this.y=frame.height-this.height;
+        else 
+        this.y+=this.speed;    }
 }
 const CMP_Bar={
     x:frame.width-frame.width/60,
     y:(frame.height-frame.height/4)/2,
     width:frame.width/60,
     height:frame.height/4,
-    color:"red",
+    color:"black",
     speed:frame.height/150,
     score:0,
     reset: function reset(){
         this.score=0;
+        this.y=(frame.height-frame.height/4)/2;
     },
     move: function move(){
         this.y+=this.speed;
@@ -89,7 +96,7 @@ function drawScore(text,x,y){
     draw.fillText(text,x,y);
 }
 function drawLines(){
-    for(let i=0;i<=frame.height;i+=15)
+    for(let i=0;i<=frame.height;i+=14)
         drawRect(SepLine.x,SepLine.y+i,SepLine.width,SepLine.height,SepLine.color);
 }
 function gameUpdate(){
@@ -100,14 +107,14 @@ function edgeCollision(){
     if(ball.y-ball.radius<=0||ball.y+ball.radius>=frame.height){
         ball.VelY*=-1;
     }
-    if(((ball.x+ball.radius>=CMP_Bar.x&&(ball.y+ball.radius<=CMP_Bar.y+100&&ball.y-ball.radius>=CMP_Bar.y))||(ball.x-ball.radius<=Player_Bar.x+Player_Bar.width&&(ball.y+ball.radius<=Player_Bar.y+100&&ball.y-ball.radius>=Player_Bar.y)))){
+    if(((ball.x+ball.radius>=CMP_Bar.x&&(ball.y-ball.radius<=CMP_Bar.y+100&&ball.y+ball.radius>=CMP_Bar.y))||(ball.x-ball.radius<=Player_Bar.x+Player_Bar.width&&(ball.y-ball.radius<=Player_Bar.y+100&&ball.y+ball.radius>=Player_Bar.y)))){
         ball.VelX*=-1;
     }
-    else if(ball.x+ball.radius>=frame.width){
+    if(ball.x+ball.radius>=frame.width){
         Player_Bar.score+=1;
         ball.reset();
     }
-    else if(ball.x-ball.radius<=0){
+    if(ball.x-ball.radius<=0){
         CMP_Bar.score+=1;
         ball.reset();
     }
@@ -120,14 +127,14 @@ function scoreReset(){
 }
 function endGame(){
     if(Player_Bar.score>=10){
-        scoreReset();
+        Restart();
         }
     else if(CMP_Bar.score>=10){
-        scoreReset();
+        Restart();
     }
 }
 function gameDraw(){
-    draw.fillStyle="black";
+    draw.fillStyle="darkgreen";
     draw.fillRect(0,0,frame.width,frame.height);   
     drawCircle(ball.x,ball.y,ball.radius,ball.color);
     draw.fillStyle=Player_Bar.color;
@@ -149,7 +156,17 @@ function gameLoop(){
 function ChangeCol(col){
     ball.color=col;
 }
-gameLoop();
+function Restart(){
+    scoreReset();
+    ball.reset();
+}
+//gameLoop();
+draw.fillStyle="darkgreen";
+draw.fillRect(0,0,frame.width,frame.height);   
+draw.fillStyle="white";
+draw.font=`30px Arial`;
+draw.fillText("Press Start to begin",15,frame.height/2);
+
 window.addEventListener("keydown",(e)=>{
     if(e.key=="ArrowUp")
         Player_Bar.up();
