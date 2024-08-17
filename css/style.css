@@ -94,6 +94,7 @@ canvas{
 .buttons{
   padding-top: 20px;
   font-size: 40px;
+  overflow: hidden;
 }
 .buttons .container{
   display: flex;
